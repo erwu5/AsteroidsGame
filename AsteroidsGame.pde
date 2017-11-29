@@ -1,16 +1,18 @@
 //your variable declarations here
 Stars[] nightSky;
-Asteroid[] belt;
+ArrayList <Asteroid> belt;
+//Asteroid[] belt;
 Spaceship apollo = new Spaceship();
 public void setup() 
 {
   //your code here
   nightSky = new Stars[180];
-  belt = new Asteroid[20];
+  //belt = new Asteroid[20];
+  belt = new ArrayList <Asteroid>();
   size(300,300);
-  for(int j = 0; j<belt.length; j++)
+  for(int j = 0; j<20; j++)
   {
-    belt[j] = new Asteroid();
+    belt.add(new Asteroid());
   }
   for(int i = 0; i< nightSky.length; i++)
   {
@@ -26,17 +28,21 @@ public void draw()
   {
     nightSky[i].show();
   }
-   for(int j = 0; j<belt.length; j++)
+   for(int j = 0; j<belt.size(); j++)
   {
-    belt[j].show();
-    belt[j].move();
+    (belt.get(j)).show();
+    (belt.get(j)).move();
   }
-  //Asteroid c = new Asteroid();
-  //c.show();
+  
   apollo.show();
   apollo.move();
   
- 
+  //remove
+  for(int j = 0; j<belt.size(); j++){
+    if(dist(apollo.getX(), apollo.getY(), (belt.get(j)).getX(), (belt.get(j).getY()))< 20){
+    belt.remove(j);
+    }
+  }
 }
 public void keyPressed(){
   if(key == 'l'){apollo.accelerate(.5);}
